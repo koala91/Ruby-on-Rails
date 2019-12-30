@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destory
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum:50 }
   # 上面带括号其实就是validates(:name, presence: true)
