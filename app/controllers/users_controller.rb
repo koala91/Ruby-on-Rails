@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def show
     # http://localhost:3000/users/1
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
