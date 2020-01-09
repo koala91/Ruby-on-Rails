@@ -30,3 +30,15 @@ users = User.order(:created_at).take(6)
   users.each { |user| user.microposts.create!(content: content) }
 end
 
+# 关系数据
+
+users2 = User.all
+user = users2.first
+following = users2[2..50]
+followers = users2[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+
+
+
+
