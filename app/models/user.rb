@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   # 取消关注一个用户
-  def unfollow(other_user)(
+  def unfollow(other_user)
     active_relationships.find_by(follower_id: other_user.id).destroy
   end
   
