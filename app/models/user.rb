@@ -16,8 +16,16 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  # 用户的动态流
   def feed
-    Micropost.where("user_id = ?", id)
+    # Micropost.where("user_id = ?", id)
+    # 初步动态流
+    Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
+    # 最终
+    following_ids = "SELECT followed_id FROM relationships
+                    WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                    OR user_id = :user_id", user_id: id)
   end
   
   # 关注一个用户
