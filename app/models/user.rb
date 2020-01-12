@@ -22,12 +22,12 @@ class User < ApplicationRecord
   
   # 关注一个用户
   def follow(other_user)
-    active_relationships.create(follower_id: other_user.id)
+    active_relationships.create(followed_id: other_user.id)
   end
 
   # 取消关注一个用户
   def unfollow(other_user)
-    active_relationships.find_by(follower_id: other_user.id).destroy
+    active_relationships.find_by(followed_id: other_user.id).destroy
   end
   
   # 如果当前用户关注了指定的用户，返回true
